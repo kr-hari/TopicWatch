@@ -8,6 +8,6 @@ Identify the latest trends/ issues/ topics related to ones interest.
 - User data management
 
 ## Contributors
-Harikrishnan Raghukumar (harikrishnankr16@gmail.com), Sneha Mishra(mishra.sneha4321@gmail.com)
+Harikrishnan Raghukumar (harikrishnankr16@gmail.com), Sneha Mishra(sneha.mishra4321@gmail.com)
 
 

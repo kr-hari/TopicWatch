@@ -1,7 +1,4 @@
 import os 
-import re
-import json
-import requests
 from datetime import datetime, timedelta
 from typing import List, Dict, Any
 from dotenv import load_dotenv
@@ -55,20 +52,37 @@ class RedditHandler():
         for submission in submissions:
             post = {feature: getattr(submission, feature, None) for feature in features}
             post['created_utc'] = datetime.utcfromtimestamp(post['created_utc']).strftime('%Y-%m-%d %H:%M:%S')
+            post = {k: str(v) if isinstance(v, (bytes, object)) and not isinstance(v, (int, float, bool, type(None), str, list, dict)) else v for k, v in post.items()}
             posts.append(post)
         return posts
+    
+    def fetch_all_subreddits(self, list_of_subreddits:[str], order_by:str, limit:int=1000) -> List[Dict[str, Any]]:
+        """
+        Fetches data from multiple subreddits based on the specified order.
+        Args:
+            list_of_subreddits (List[str]): A list of subreddit names to fetch data from.
+            order_by (str): The order to fetch data by. Can be 'new', 'hot', 'top', etc.
+            limit (int): The maximum number of posts to fetch per subreddit. Default is 1000.
+        Returns:
+            List[Dict[str, Any]]: A list of dictionaries containing the subreddit data.
+        """
+        all_posts = []
+        for subreddit in list_of_subreddits:
+            posts = self.fetch_subreddit_data(subreddit, order_by, limit)
+            all_posts.extend(posts)
+        return all_posts
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    TEST_SUBREDDDIT = r'learnmachinelearning'
-    handler = RedditHandler(TEST_SUBREDDDIT)
+#     TEST_SUBREDDDIT = r'learnmachinelearning'
+#     handler = RedditHandler(TEST_SUBREDDDIT)
 
-    # Fetch new posts
-    new_posts = handler.fetch_subreddit_data(order_by='new', limit=10)
+#     # Fetch new posts
+#     new_posts = handler.fetch_subreddit_data(order_by='new', limit=10)
 
-    # Print the new posts
-    print("New Posts:")
-    for post in new_posts:
-        print(post)
-        print("\n")
+#     # Print the new posts
+#     print("New Posts:")
+#     for post in new_posts:
+#         print(post)
+#         print("\n") 

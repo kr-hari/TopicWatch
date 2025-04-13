@@ -1,0 +1,7 @@
+{
+    "docker.composeFile": [
+      "docker-compose.yml"
+    ],
+    "docker.dockerPath": "/Applications/Docker.app/Contents/Resources/bin/docker"
+  }
+  

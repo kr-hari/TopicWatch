@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo
+    container_name: reddit_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo:/data/db
+      - ./infra/docker/mongo/init.js:/docker-entrypoint-initdb.d/init.js:ro
+    environment:
+      MONGO_INITDB_DATABASE: reddit_scraper
+
+volumes:
+  mongo_data:

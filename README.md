@@ -23,6 +23,7 @@ Harikrishnan Raghukumar (harikrishnankr16@gmail.com), Sneha Mishra(mishra.sneha4
 
 ## Python scripts
 - To run INGESTOR : `uvicorn apps.ingestor.main:app --reload --port 8080`
+- To run user_service: `python3 -m uvicorn apps.user_service.main:app --reload`
 
 ## API related 
 - To see swagger and test out API: http://127.0.0.1:8080/docs
